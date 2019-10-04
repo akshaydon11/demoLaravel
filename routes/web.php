@@ -23,7 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 Route::get('/employee/all', 'HomeController@employee')->name('empList');
 Route::get('/delete/{EmpID}', 'HomeController@destroy')->name('deleteEmp');
-
+Route::get('/edit/{EmpID}', 'HomeController@edit')->name('editEmp');
+Route::post('/update/{EmpID}', 'HomeController@update')->name('update');
 
 
 Route::get('/logout', function(){

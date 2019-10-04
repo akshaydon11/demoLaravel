@@ -43,4 +43,21 @@ class HomeController extends Controller
         $emp->delete();
         return redirect()->route('empList');
     }
+    public function edit($id)
+    {
+        $emp = Employee::find($id);
+        return view('edit_employee',compact('emp'));
+    }
+    public function update($id,Request $request)
+    {
+        $emp = Employee::find($id);
+
+        $emp->EmpName    = $request->name;
+        $emp->Designation    = $request->position;
+        $emp->Department    = $request->dept;
+        $emp->JoiningDate    = $request->dateofjoin;
+
+        $emp->update();
+        return redirect()->route('empList');
+    }
 }
