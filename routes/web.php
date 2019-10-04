@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+	return redirect('login');
 });
 
 Route::get('send','mailController@send')->name('sendemail');
