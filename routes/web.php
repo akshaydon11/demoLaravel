@@ -15,7 +15,7 @@ Route::get('/', function () {
 	return redirect('login');
 });
 
-Route::get('send','mailController@send')->name('sendemail');
+Route::post('send','mailController@send')->name('sendemail');
 
 Auth::routes();
 
@@ -26,9 +26,22 @@ Route::get('/delete/{EmpID}', 'HomeController@destroy')->name('deleteEmp');
 Route::get('/edit/{EmpID}', 'HomeController@edit')->name('editEmp');
 Route::post('/update/{EmpID}', 'HomeController@update')->name('update');
 
+Route::post('uploadimg', 'HomeController@uploadimg');
+
 
 Route::get('/logout', function(){
 	Auth::logout();
 	return redirect('login');
+});
+
+Route::get('/imagedemo', function()
+{
+    $img = Image::make('Desert.jpg')->resize(300, 200);
+
+    $imgname = $img->basename;
+
+    //$dt = $img->response('jpg');
+
+    $img->save('upload/'.$imgname);
 });
 

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Employee;
 
+use \Gumlet\ImageResize;
+// import the Intervention Image Manager Class
+use Intervention\Image\ImageManagerStatic as Image;
+
 class HomeController extends Controller
 {
     /**
@@ -34,7 +38,6 @@ class HomeController extends Controller
     public function employee()
     {
         $data = Employee::get();
-        //dd($data);
         return view('employees',compact('data'));
     }
     public function destroy($id)
@@ -56,8 +59,26 @@ class HomeController extends Controller
         $emp->Designation    = $request->position;
         $emp->Department    = $request->dept;
         $emp->JoiningDate    = $request->dateofjoin;
+        $emp->salary    = $request->salary;
+        $emp->email    = $request->email;
 
         $emp->update();
         return redirect()->route('empList');
+    }
+
+    public function uploadimg(Request $request){
+
+        $image = $request->file('photo');
+        $realName = $image->getClientOriginalName();
+        $input['imagename'] = time().'_'.$realName;
+        $destinationPath = public_path('/upload');
+
+        $imgname = $input['imagename'];
+
+        $img = Image::make($image)->crop(400, 600, 25, 25);
+        //$img = Image::make($imgname)->resize(300, 200);
+
+        $img->save('upload/'.$imgname);
+
     }
 }

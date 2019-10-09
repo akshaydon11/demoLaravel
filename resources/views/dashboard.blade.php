@@ -35,7 +35,11 @@
           </div>
         </div>
       </div>
-
+      <!-- <form method="post" action="{{ url('uploadimg') }}" enctype="multipart/form-data">
+       {{ csrf_field() }}
+          <input type="file" name="photo">  <input type="submit" name="sub">
+      </form> -->
+     
       <!-- Earnings (Monthly) Card Example -->
       <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
